@@ -2,6 +2,7 @@ import styled from '@emotion/styled'
 import { ReactComponent as IconBadge } from '@assets/icons/icon-badge.svg'
 import { typeChecking } from '@utils/functions'
 import PropTypes from 'prop-types'
+import defaultColor from '@assets/colors'
 
 const BadgeContainer = styled.span`
   display: inline-flex;
@@ -35,7 +36,7 @@ Badge.propTypes = {
 
 Badge.defaultProps = {
   size: 13,
-  color: '#36f',
+  color: defaultColor.blue,
 }
 
 export default Badge
