@@ -20,6 +20,10 @@ const ResetCss = css`
     text-decoration: none;
   }
 
+  span {
+    display: inline-block;
+  }
+
   button {
     background-color: transparent;
     border: none;
