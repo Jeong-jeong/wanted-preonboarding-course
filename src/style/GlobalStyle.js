@@ -1,4 +1,6 @@
 import { Global, css } from '@emotion/react'
+import font from '@assets/fonts'
+
 const ResetCss = css`
   * {
     box-sizing: border-box;
@@ -7,12 +9,28 @@ const ResetCss = css`
   }
 
   html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
     font-size: 16px;
+  }
+
+  body {
+    font-family: -apple-system, Helvetica, Arial, 'Apple SD Gothic Neo',
+      'Nanum Gothic', 'Malgun Gothic', sans-serif;
+    ${font.base};
+    height: 100%;
   }
 
   ol,
   ul {
     list-style: none;
+  }
+
+  li {
+    display: inline-block;
   }
 
   a {
