@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import defaultColor from '@assets/colors'
+import font from '@assets/fonts'
 import PropTypes from 'prop-types'
 
 const Button = styled.button`
@@ -15,6 +16,7 @@ const Button = styled.button`
     height: 30px;
     padding: 0 10px;
     border: 1px solid ${defaultColor.borderLighter};
+    ${font.tag};
   }
 
   &.topBanner {
