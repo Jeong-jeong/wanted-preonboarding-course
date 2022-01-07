@@ -5,4 +5,4 @@ export default {
   component: AsideMenu,
 }
 
-export const Default = () => <AsideMenu mode="search" />
+export const Default = () => <AsideMenu />
