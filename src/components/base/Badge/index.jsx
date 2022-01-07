@@ -9,6 +9,8 @@ const BadgeContainer = styled.span`
   justify-content: center;
   align-items: center;
   position: absolute;
+  top: 0px;
+  left: 24px;
   width: ${({ size }) => typeChecking(size)};
   height: ${({ size }) => typeChecking(size)};
   background-color: ${({ color }) => color};
