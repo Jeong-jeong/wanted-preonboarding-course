@@ -22,8 +22,8 @@ const AvatarImage = styled.div`
   background-repeat: no-repeat;
 `
 
-const Avatar = ({ ...props }) => (
-  <AvatarWrapper style={{ ...props.style }}>
+const Avatar = () => (
+  <AvatarWrapper>
     <AvatarImage />
   </AvatarWrapper>
 )
