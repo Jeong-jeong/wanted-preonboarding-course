@@ -7,7 +7,6 @@ const Button = styled.button`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
   color: ${defaultColor.secondary};
   border-radius: 15px;
   background-color: white;
@@ -20,6 +19,7 @@ const Button = styled.button`
   }
 
   &.topBanner {
+    position: absolute;
     width: 30px;
     height: 60px;
     color: ${defaultColor.primary};
@@ -33,14 +33,20 @@ const Button = styled.button`
   }
 `
 
-const Tag = ({ mode, children, ...props }) => (
-  <Button className={mode} style={{ ...props.style }} {...props}>
+const Tag = ({ mode, label, children, ...props }) => (
+  <Button
+    className={mode}
+    aria-label={label}
+    style={{ ...props.style }}
+    {...props}
+  >
     <span>{children}</span>
   </Button>
 )
 
 Tag.propTypes = {
   mode: PropTypes.string,
+  label: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
 }
 
