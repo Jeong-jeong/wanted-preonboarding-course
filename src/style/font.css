@@ -1,0 +1,31 @@
+@font-face {
+  font-family: 'icomoon';
+  src: url('https://d1azc1qln24ryf.cloudfront.net/78252/wantedicon/icomoon.eot?8et930');
+  src: url('https://d1azc1qln24ryf.cloudfront.net/78252/wantedicon/icomoon.eot?8et930#iefix')
+      format('embedded-opentype'),
+    url('https://d1azc1qln24ryf.cloudfront.net/78252/wantedicon/icomoon.woff2?8et930')
+      format('woff2'),
+    url('https://d1azc1qln24ryf.cloudfront.net/78252/wantedicon/icomoon.ttf?8et930')
+      format('truetype'),
+    url('https://d1azc1qln24ryf.cloudfront.net/78252/wantedicon/icomoon.woff?8et930')
+      format('woff'),
+    url('https://d1azc1qln24ryf.cloudfront.net/78252/wantedicon/icomoon.svg?8et930#icomoon')
+      format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^='icon-'],
+[class*=' icon-'] {
+  font-family: 'icomoon' !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+}
+
+.icon-logo_new:before {
+  content: '\e992';
+}

@@ -1,4 +1,5 @@
 import { GlobalStyle } from '@style/GlobalStyle'
+import '@style/font.css'
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
