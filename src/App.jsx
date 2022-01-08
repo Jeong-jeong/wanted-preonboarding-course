@@ -1,6 +1,8 @@
 import React from 'react'
+import '@style/font.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { GlobalStyle } from '@style/GlobalStyle'
+import { MainBar } from '@components/domain'
 
 const App = () => {
   return (
@@ -11,7 +13,7 @@ const App = () => {
           <Route></Route>
         </Routes>
       </BrowserRouter>
-      <button>hi</button>
+      <MainBar />
     </>
   )
 }
