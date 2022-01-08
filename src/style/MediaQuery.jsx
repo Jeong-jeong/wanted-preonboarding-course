@@ -76,11 +76,11 @@ export const CssMediaQueries = (screen) => {
     case 'sm':
       return `@media (max-width:${breakpoints[screen] - 1}px)`
     case 'md':
-      return `@media (min-width:${breakpoints[screen]}px) and (max-width:${
+      return `@media (min-width:${breakpoints['sm']}px) and (max-width:${
         breakpoints[screen] - 1
       }px)`
     case 'lg':
-      return `@media (min-width:${breakpoints[screen]}px) and (max-width:${breakpoints[screen]}px)`
+      return `@media (min-width:${breakpoints['md']}px) and (max-width:${breakpoints[screen]}px)`
     case 'xl':
       return `@media (min-width:${breakpoints[screen]}px)`
     default:
