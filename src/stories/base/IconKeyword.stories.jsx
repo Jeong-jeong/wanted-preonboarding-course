@@ -18,10 +18,7 @@ export const Default = () => {
       <li>
         <Link>
           커뮤니티
-          <IconKeyword
-            txt="New"
-            style={{ position: 'absolute', top: 10, right: -5 }}
-          />
+          <IconKeyword txt="New" />
         </Link>
       </li>
     </ul>

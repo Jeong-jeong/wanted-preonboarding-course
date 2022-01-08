@@ -1,8 +1,15 @@
 import React from 'react'
+import styled from '@emotion/styled'
 import defaultColor from '@assets/colors'
 
+const IconKeywordWrapper = styled.em`
+  position: absolute;
+  top: 10px;
+  right: -5px;
+`
+
 const IconKeyword = ({ txt, ...props }) => (
-  <em style={{ ...props.style }}>
+  <IconKeywordWrapper style={{ ...props.style }}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="18"
@@ -17,27 +24,15 @@ const IconKeyword = ({ txt, ...props }) => (
         fontWeight="500"
       >
         <g fill={defaultColor.blue}>
-          <g>
-            <g>
-              <g>
-                <g>
-                  <g>
-                    <g>
-                      <text transform="translate(-931.000000, -13.000000) translate(224.000000, 7.000000) translate(210.000000, 6.000000) translate(350.000000, 0.000000) translate(147.000000, 0.000000)">
-                        <tspan x="0" y="8">
-                          {txt}
-                        </tspan>
-                      </text>
-                    </g>
-                  </g>
-                </g>
-              </g>
-            </g>
-          </g>
+          <text transform="translate(-931.000000, -13.000000) translate(224.000000, 7.000000) translate(210.000000, 6.000000) translate(350.000000, 0.000000) translate(147.000000, 0.000000)">
+            <tspan x="0" y="8">
+              {txt}
+            </tspan>
+          </text>
         </g>
       </g>
     </svg>
-  </em>
+  </IconKeywordWrapper>
 )
 
 export default IconKeyword
