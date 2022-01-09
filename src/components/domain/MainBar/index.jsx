@@ -1,28 +1,43 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { Image, Logo } from '@components/base'
+import IconMenuSrc from '@assets/icons/icon-menu.png'
 import {
   CssMediaQueries,
   BREAKPOINT_SM,
   BREAKPOINT_MD,
+  BREAKPOINT_LG,
 } from '@style/MediaQuery'
-import IconMenuSrc from '@assets/icons/icon-menu.png'
-
-const HEIGHT_MD = 60
-const HEIGHT_LG = 50
+import { Image, Logo } from '@components/base'
+import {
+  GNB_PD_HORIZONTAL,
+  GNB_PD_VETCITAL,
+  MAINBAR_HEIGHT,
+  GNB_HEIGHT,
+} from '@utils/constants'
 
 const MainBarWrapper = styled.div`
-  border: 1px solid;
+  display: flex;
+  align-items: center;
+
   ${CssMediaQueries(BREAKPOINT_SM)} {
     width: 100%;
-    height: ${HEIGHT_MD};
-    padding: 15px 20px;
+    height: ${MAINBAR_HEIGHT};
+    padding: ${GNB_PD_VETCITAL} ${GNB_PD_HORIZONTAL};
   }
 
   ${CssMediaQueries(BREAKPOINT_MD)} {
-    padding: 15px 0;
+    width: 100%;
+    height: ${MAINBAR_HEIGHT};
+    padding: ${GNB_PD_VETCITAL} 0;
+  }
+
+  ${CssMediaQueries(BREAKPOINT_LG)} {
+    height: ${GNB_HEIGHT};
+    padding: ${GNB_PD_VETCITAL} 0;
   }
 `
+
+const MainBarContainer = styled.div``
 
 const IconMenu = styled.button`
   margin-top: -2px;
@@ -32,16 +47,18 @@ const IconMenu = styled.button`
 const MainBar = () => {
   return (
     <MainBarWrapper>
-      <IconMenu>
-        <Image
-          width={17}
-          height={14}
-          src={IconMenuSrc}
-          mode="contain"
-          alt="메뉴 아이콘"
-        />
-      </IconMenu>
-      <Logo />
+      <MainBarContainer>
+        <IconMenu>
+          <Image
+            width={17}
+            height={14}
+            src={IconMenuSrc}
+            mode="contain"
+            alt="메뉴 아이콘"
+          />
+        </IconMenu>
+        <Logo />
+      </MainBarContainer>
     </MainBarWrapper>
   )
 }
