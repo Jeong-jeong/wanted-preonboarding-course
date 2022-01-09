@@ -29,9 +29,16 @@ export const SMhidden = ({ children }) => {
 
 export const MD = ({ children }) => {
   const isMd = useMediaQuery({
-    query: `(min-width:${breakpoints[BREAKPOINT_MD]}px) and (max-width:${
-      breakpoints[screen] - 1
+    query: `(min-width:${breakpoints[BREAKPOINT_SM]}px) and (max-width:${
+      breakpoints[BREAKPOINT_MD] - 1
     }px)`,
+  })
+  return <>{isMd && children}</>
+}
+
+export const MDEnd = ({ children }) => {
+  const isMd = useMediaQuery({
+    query: `(max-width:${breakpoints[BREAKPOINT_MD]}px)`,
   })
   return <>{isMd && children}</>
 }
@@ -45,7 +52,14 @@ export const MDhidden = ({ children }) => {
 
 export const LG = ({ children }) => {
   const isLg = useMediaQuery({
-    query: `(min-width:${breakpoints[BREAKPOINT_LG]}px) and (max-width:${breakpoints[screen]}px)`,
+    query: `(min-width:${breakpoints[BREAKPOINT_MD]}px) and (max-width:${breakpoints[BREAKPOINT_LG]}px)`,
+  })
+  return <>{isLg && children}</>
+}
+
+export const MDTOXL = ({ children }) => {
+  const isLg = useMediaQuery({
+    query: `(min-width:${breakpoints[BREAKPOINT_MD]}px) and (max-width:${breakpoints[BREAKPOINT_XL]}px)`,
   })
   return <>{isLg && children}</>
 }
@@ -81,6 +95,8 @@ export const CssMediaQueries = (screen) => {
       }px)`
     case 'lg':
       return `@media (min-width:${breakpoints['md']}px) and (max-width:${breakpoints[screen]}px)`
+    case 'mdxl':
+      return `@media (min-width:${breakpoints['md']}px) and (max-width:${breakpoints['xl']}px)`
     case 'xl':
       return `@media (min-width:${breakpoints[screen]}px)`
     default:
