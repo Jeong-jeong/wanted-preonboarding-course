@@ -1,19 +1,15 @@
 import React from 'react'
 import '@style/font.css'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Router from '@router/Router'
 import { GlobalStyle } from '@style/GlobalStyle'
-import { MainBar } from '@components/domain'
+import { GNB } from '@components/common'
 
 const App = () => {
   return (
     <>
       <GlobalStyle />
-      <BrowserRouter>
-        <Routes>
-          <Route></Route>
-        </Routes>
-      </BrowserRouter>
-      <MainBar />
+      <Router />
+      <GNB />
     </>
   )
 }
