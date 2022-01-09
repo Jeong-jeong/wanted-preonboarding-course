@@ -18,7 +18,7 @@ const ResetCss = css`
   }
 
   body {
-    font-family: -apple-system, Helvetica, Arial, 'Apple SD Gothic Neo',
+    font-family: -apple-system, 'Apple SD Gothic Neo', Helvetica, Arial,
       'Nanum Gothic', 'Malgun Gothic', sans-serif;
     ${font.base};
     height: 100%;
