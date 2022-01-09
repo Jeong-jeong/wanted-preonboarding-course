@@ -1,6 +1,6 @@
 import { AsideWrapper, AsideList, AsideItem } from './style'
+import { MDEnd, MDhidden } from '@style/MediaQuery'
 import { IconBtn, Tag } from '@components/base'
-import { SM, SMhidden } from '@style/MediaQuery'
 
 const AsideMenu = () => {
   return (
@@ -12,19 +12,19 @@ const AsideMenu = () => {
         <AsideItem>
           <IconBtn mode="bell" />
         </AsideItem>
-        <SM>
-          <AsideItem>
+        <MDEnd>
+          <AsideItem className="menuItem">
             <IconBtn mode="menu" />
           </AsideItem>
-        </SM>
-        <SMhidden>
+        </MDEnd>
+        <MDhidden>
           <AsideItem>
             <IconBtn mode="avatar" />
           </AsideItem>
           <AsideItem divider>
             <Tag label="기업 서비스 바로가기">기업 서비스</Tag>
           </AsideItem>
-        </SMhidden>
+        </MDhidden>
       </AsideList>
     </AsideWrapper>
   )

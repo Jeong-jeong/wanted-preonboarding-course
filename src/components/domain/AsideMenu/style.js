@@ -2,9 +2,10 @@ import styled from '@emotion/styled'
 import { css } from '@emotion/react'
 import { CssMediaQueries, BREAKPOINT_XL } from '@style/MediaQuery'
 import defaultColor from '@assets/colors'
+import { GNB_HEIGHT_SM, MAINBAR_HEIGHT } from '@utils/constants'
 
-const AsideWrapper = styled.aside`
-  height: 50px; // FIXME: 나중에 삭제하기
+export const AsideWrapper = styled.aside`
+  height: calc(${GNB_HEIGHT_SM} - ${MAINBAR_HEIGHT});
   padding: 9px 0;
 
   ul > li > * {
@@ -17,7 +18,7 @@ const AsideWrapper = styled.aside`
   }
 `
 
-const AsideList = styled.ul`
+export const AsideList = styled.ul`
   display: inline-flex;
   align-items: center;
   height: 100%;
@@ -37,13 +38,17 @@ const DividerStyle = css`
   }
 `
 
-const AsideItem = styled.li`
+export const AsideItem = styled.li`
   position: relative;
   height: 100%;
+
+  &[class*='menuItem'] {
+    & > button {
+      margin-right: 10px;
+    }
+  }
 
   &:before {
     ${({ divider }) => divider && DividerStyle}
   }
 `
-
-export { AsideWrapper, AsideList, AsideItem }
