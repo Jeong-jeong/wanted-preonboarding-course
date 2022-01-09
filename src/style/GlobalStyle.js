@@ -36,6 +36,7 @@ const ResetCss = css`
   a {
     color: inherit;
     text-decoration: none;
+    cursor: pointer;
   }
 
   span {
