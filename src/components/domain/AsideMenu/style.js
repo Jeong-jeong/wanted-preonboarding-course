@@ -11,6 +11,7 @@ export const AsideWrapper = styled.aside`
   ul > li > * {
     height: 100%;
     padding: 0 6px;
+    color: ${defaultColor.primary};
 
     ${CssMediaQueries(BREAKPOINT_XL)} {
       padding: 0 10px;
