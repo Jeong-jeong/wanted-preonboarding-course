@@ -1,8 +1,9 @@
-import { Badge, Avatar } from '@components/base'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { ReactComponent as IconBell } from '@assets/icons/icon-bell.svg'
 import { ReactComponent as IconSearch } from '@assets/icons/icon-search.svg'
 import { ReactComponent as IconAsideMenu } from '@assets/icons/icon-asideMenu.svg'
-import PropTypes from 'prop-types'
+import { Badge, Avatar } from '@components/base'
 
 const modeInfo = {
   search: '검색 버튼',
