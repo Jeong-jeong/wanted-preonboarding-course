@@ -45,6 +45,11 @@ const NavLink = styled.a`
     font-size: 13px;
   }
 
+  ${CssMediaQueries(BREAKPOINT_LG)} {
+    padding: ${GNB_PD_VETCITAL} 0;
+    font-size: 13px;
+  }
+
   &[class*='homeBtn'] {
     padding-left: ${GNB_PD_HORIZONTAL};
     ${borderSelectedNav}
