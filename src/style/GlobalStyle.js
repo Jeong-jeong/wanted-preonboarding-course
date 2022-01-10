@@ -14,11 +14,12 @@ const ResetCss = css`
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
+    font-family: sans-serif;
     font-size: 16px;
   }
 
   body {
-    font-family: -apple-system, Helvetica, Arial, 'Apple SD Gothic Neo',
+    font-family: -apple-system, 'Apple SD Gothic Neo', Helvetica, Arial,
       'Nanum Gothic', 'Malgun Gothic', sans-serif;
     ${font.base};
     height: 100%;
@@ -36,6 +37,7 @@ const ResetCss = css`
   a {
     color: inherit;
     text-decoration: none;
+    cursor: pointer;
   }
 
   span {

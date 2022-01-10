@@ -1,6 +1,10 @@
 import styled from '@emotion/styled'
 import { css } from '@emotion/react'
-import { CssMediaQueries, BREAKPOINT_XL } from '@style/MediaQuery'
+import {
+  CssMediaQueries,
+  BREAKPOINT_MD,
+  BREAKPOINT_XL,
+} from '@style/MediaQuery'
 import defaultColor from '@assets/colors'
 import { GNB_HEIGHT_SM, MAINBAR_HEIGHT } from '@utils/constants'
 
@@ -11,6 +15,7 @@ export const AsideWrapper = styled.aside`
   ul > li > * {
     height: 100%;
     padding: 0 6px;
+    color: ${defaultColor.primary};
 
     ${CssMediaQueries(BREAKPOINT_XL)} {
       padding: 0 10px;
@@ -50,5 +55,13 @@ export const AsideItem = styled.li`
 
   &:before {
     ${({ divider }) => divider && DividerStyle}
+  }
+
+  ${CssMediaQueries(BREAKPOINT_MD + BREAKPOINT_XL)} {
+    &[class*='bellItem'] {
+      & > button {
+        margin-right: 5px;
+      }
+    }
   }
 `
