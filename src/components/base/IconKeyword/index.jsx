@@ -1,11 +1,27 @@
 import React from 'react'
 import styled from '@emotion/styled'
+import {
+  CssMediaQueries,
+  BREAKPOINT_MD,
+  BREAKPOINT_LG,
+} from '@style/MediaQuery'
 import defaultColor from '@assets/colors'
 
 const IconKeywordWrapper = styled.em`
   position: absolute;
   top: 10px;
   right: -5px;
+  pointer-events: none;
+
+  ${CssMediaQueries(BREAKPOINT_MD)} {
+    top: 4px;
+    right: -8px;
+  }
+
+  ${CssMediaQueries(BREAKPOINT_LG)} {
+    top: 9px;
+    right: -20px;
+  }
 `
 
 const IconKeyword = ({ txt, ...props }) => (

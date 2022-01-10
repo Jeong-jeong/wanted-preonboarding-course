@@ -1,3 +1,6 @@
 export { default as AsideMenu } from './AsideMenu'
 export { default as MainBar } from './MainBar'
 export { default as MainNav } from './MainNav'
+export { default as Slider } from './Slider'
+export { default as SliderItem } from './SliderItem'
+export { default as InformationCard } from './InformationCard'

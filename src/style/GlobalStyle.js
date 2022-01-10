@@ -19,8 +19,8 @@ const ResetCss = css`
   }
 
   body {
-    font-family: -apple-system, 'Apple SD Gothic Neo', Helvetica, Arial,
-      'Nanum Gothic', 'Malgun Gothic', sans-serif;
+    font-family: -apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic',
+      'Nanum Gothic', Helvetica, Arial, sans-serif;
     ${font.base};
     height: 100%;
   }
@@ -48,6 +48,14 @@ const ResetCss = css`
     background-color: transparent;
     border: none;
     cursor: pointer;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-weight: normal;
   }
 `
 

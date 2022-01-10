@@ -1,45 +1,43 @@
 import PropTypes from 'prop-types'
-import { typeChecking } from '@utils/functions'
 import { css } from '@emotion/core'
+import { typeChecking } from '@utils/functions'
+import { CARD_BORDER_RADIUS } from '@utils/constants'
 
-const Image = ({
-  block,
+const Card = ({
   width,
   height,
   borderRadius,
-  src,
-  alt,
-  mode,
+  backColor,
+  children,
   ...props
 }) => {
-  const ImageStyle = css`
-    display: ${block ? 'block' : 'inline-block'};
+  const CardStyle = css`
     width: ${typeChecking(width)};
     height: ${typeChecking(height)};
+    background-color: ${backColor};
     border-radius: ${borderRadius};
-    object-fit: ${mode};
   `
 
-  return <img src={src} alt={alt} css={ImageStyle} {...props} />
+  return (
+    <div css={CardStyle} style={{ ...props.style }}>
+      {children}
+    </div>
+  )
 }
 
 Image.propTypes = {
-  block: PropTypes.bool,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  backColor: PropTypes.string,
   borderRadius: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  src: PropTypes.string,
-  alt: PropTypes.string.isRequired,
-  mode: PropTypes.oneOf(['fill', 'cover', 'none', 'contain']),
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
 }
 
 Image.defaultProps = {
-  src: '',
-  block: false,
   width: '100%',
   height: '100%',
-  borderRadius: 0,
-  mode: 'fill',
+  backColor: 'white',
+  borderRadius: CARD_BORDER_RADIUS,
 }
 
-export default Image
+export default Card

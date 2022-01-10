@@ -1,32 +1,32 @@
-import { AsideWrapper, AsideList, AsideItem } from './style'
 import { MDEnd, MDhidden } from '@style/MediaQuery'
 import { IconBtn, Tag } from '@components/base'
+import * as Style from './style'
 
 const AsideMenu = () => {
   return (
-    <AsideWrapper>
-      <AsideList>
-        <AsideItem>
+    <Style.AsideWrapper>
+      <Style.AsideList>
+        <Style.AsideItem>
           <IconBtn />
-        </AsideItem>
-        <AsideItem className="bellItem">
+        </Style.AsideItem>
+        <Style.AsideItem className="bellItem">
           <IconBtn mode="bell" />
-        </AsideItem>
+        </Style.AsideItem>
         <MDEnd>
-          <AsideItem className="menuItem">
+          <Style.AsideItem className="menuItem">
             <IconBtn mode="menu" />
-          </AsideItem>
+          </Style.AsideItem>
         </MDEnd>
         <MDhidden>
-          <AsideItem>
+          <Style.AsideItem>
             <IconBtn mode="avatar" />
-          </AsideItem>
-          <AsideItem divider>
+          </Style.AsideItem>
+          <Style.AsideItem divider>
             <Tag label="기업 서비스 바로가기">기업 서비스</Tag>
-          </AsideItem>
+          </Style.AsideItem>
         </MDhidden>
-      </AsideList>
-    </AsideWrapper>
+      </Style.AsideList>
+    </Style.AsideWrapper>
   )
 }
 
