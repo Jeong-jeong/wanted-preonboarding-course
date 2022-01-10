@@ -9,7 +9,7 @@ const AsideMenu = () => {
         <AsideItem>
           <IconBtn />
         </AsideItem>
-        <AsideItem>
+        <AsideItem className="bellItem">
           <IconBtn mode="bell" />
         </AsideItem>
         <MDEnd>
