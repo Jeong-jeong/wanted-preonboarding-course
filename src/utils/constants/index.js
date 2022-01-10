@@ -1,12 +1,17 @@
+// COMMON
 export const MAX_WIDTH = '1060px'
 
-// COMPONENT SIZE
+// GNB
 export const GNB_HEIGHT = '50px'
 export const GNB_HEIGHT_SM = '110px'
 export const GNB_PD_HORIZONTAL = '20px'
 export const GNB_PD_VETCITAL = '15px'
 
 export const MAINBAR_HEIGHT = '60px'
+
+// CARD
+export const CARD_PD_BASE = '20px'
+export const CARD_BORDER_RADIUS = '4px'
 
 // Z-INDEX
 export const GNB_ZINDEX = 100
