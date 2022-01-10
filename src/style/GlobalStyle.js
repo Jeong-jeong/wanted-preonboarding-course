@@ -14,6 +14,7 @@ const ResetCss = css`
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
+    font-family: sans-serif;
     font-size: 16px;
   }
 
