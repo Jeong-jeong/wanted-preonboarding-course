@@ -1,4 +1,5 @@
 // COMMON
+export const END_POINT = 'https://static.wanted.co.kr'
 export const MAX_WIDTH = '1060px'
 
 // GNB
