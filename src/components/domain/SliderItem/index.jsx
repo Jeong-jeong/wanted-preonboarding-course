@@ -3,13 +3,15 @@ import styled from '@emotion/styled'
 import { CssMediaQueries, BREAKPOINT_XL, XL, XLhidden } from '@style/MediaQuery'
 import { Image } from '@components/base'
 import { InformationCard } from '@components/domain'
-import { CARD_PD_BASE, CARD_BORDER_RADIUS } from '@utils/constants'
-import { typeChecking } from '@utils/functions'
-import { useEffect, useLayoutEffect, useState } from 'react'
+import {
+  CARD_PD_BASE,
+  CARD_BORDER_RADIUS,
+  Slider_PD_BASE,
+} from '@utils/constants'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 const SliderBoxWrapper = styled.li`
   float: left;
-  width: ${({ width }) => typeChecking(width)};
   height: 100%;
 `
 
@@ -46,7 +48,6 @@ const ImageLink = styled.a`
 
 const SliderItem = ({
   isCurrent,
-  width,
   index,
   link,
   src,
@@ -55,13 +56,20 @@ const SliderItem = ({
   content,
   ...props
 }) => {
-  const [resizeWidth, setResizeWidth] = useState(window.innerWidth - 80)
+  const sliderItemRef = useRef(null)
 
   useEffect(() => {
     const handleResize = () => {
-      setResizeWidth(window.innerWidth - 80)
+      sliderItemRef.current.style = `width: ${
+        // FIXME: 중복 처리
+        window.innerWidth - Slider_PD_BASE * 2
+      }px`
     }
 
+    sliderItemRef.current.style = `width: ${
+      // FIXME: 중복 처리
+      window.innerWidth - Slider_PD_BASE * 2
+    }px`
     window.addEventListener('resize', handleResize)
 
     return () => {
@@ -71,9 +79,9 @@ const SliderItem = ({
 
   return (
     <SliderBoxWrapper
+      ref={sliderItemRef}
       className={isCurrent ? 'currentIndex' : ''}
       data-index={index}
-      width={resizeWidth}
       style={{ ...props.style }}
     >
       <SliderBoxContainer>
@@ -107,6 +115,7 @@ const SliderItem = ({
 
 SliderItem.propTypes = {
   isCurrent: PropTypes.bool,
+  index: PropTypes.number.isRequired,
   link: PropTypes.string.isRequired,
   src: PropTypes.string.isRequired,
   srcXL: PropTypes.string.isRequired,
