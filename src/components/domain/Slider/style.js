@@ -25,7 +25,7 @@ export const SliderList = styled.div`
 `
 
 export const SliderTrack = styled.ul`
-  width: 10000px;
+  width: ${({ width }) => typeChecking(width)};
   transition: ${({ isTransition }) =>
     isTransition && `transform 500ms ease 0s`};
 

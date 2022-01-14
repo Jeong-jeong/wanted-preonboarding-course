@@ -38,6 +38,8 @@ const Slider = () => {
   }
 
   const clonedCardList = useMemo(() => getClonedCardList(cardList), [cardList])
+  const cloneLength = clonedCardList.length
+  const [totalWidth, setTotalWidth] = useState(cloneLength * innerWidth)
 
   const setTransition = (value) => {
     sliderRef.current.style = `transform:
@@ -72,6 +74,7 @@ const Slider = () => {
       draggedXRef.current =
         (currendIndexRef.current + countClone) * -resizeWidth
       resizeWidth = window.innerWidth - Slider_PD_BASE * 2
+      setTotalWidth(cloneLength * innerWidth) // FIXME:계속 재선언됨
     }
 
     const initialDrag = (e) => {
@@ -155,7 +158,7 @@ const Slider = () => {
     sliderRef.current.addEventListener('touchstart', initialDrag)
     sliderRef.current.addEventListener('touchmove', dragMove)
     sliderRef.current.addEventListener('mousedown', mouseMove)
-    sliderRef.current.addEventListener('touchend', dragEnd)
+    window.addEventListener('touchend', dragEnd)
     window.addEventListener('mouseup', dragEnd)
     // sliderRef.current.addEventListener('click', slideClick)
 
@@ -165,7 +168,7 @@ const Slider = () => {
         sliderRef.current.removeEventListener('touchstart', initialDrag)
         sliderRef.current.removeEventListener('touchmove', dragMove)
         sliderRef.current.removeEventListener('mousedown', mouseMove)
-        sliderRef.current.removeEventListener('touchend', dragEnd)
+        window.removeEventListener('touchend', dragEnd)
         window.removeEventListener('mouseup', dragEnd)
       }
     }
@@ -175,7 +178,11 @@ const Slider = () => {
     <Style.SliderWrapper>
       <Style.SliderContainer>
         <Style.SliderList>
-          <Style.SliderTrack ref={sliderRef} isTransition={isTransition}>
+          <Style.SliderTrack
+            ref={sliderRef}
+            isTransition={isTransition}
+            width={totalWidth}
+          >
             {clonedCardList.map(
               ({ index, src, srcXL, title, content, link }) => (
                 <SliderItem
