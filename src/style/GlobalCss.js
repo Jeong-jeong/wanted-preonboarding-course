@@ -7,10 +7,10 @@ export const borderBottom = css`
 
 export const divider = css`
   flex-shrink: 0;
+  -ms-flex-negative: 0;
   height: 1px;
   margin: 0;
   border: none;
-  -ms-flex-negative: 0; // FIXME: 임시
   background-color: ${defaultColor.borderLighter};
 `
 
@@ -32,4 +32,13 @@ export const clearFloat = css`
   display: block;
   clear: both;
   content: '';
+`
+
+export const dragNone = css`
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
 `

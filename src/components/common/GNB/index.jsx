@@ -13,6 +13,7 @@ import {
   GNB_ZINDEX,
 } from '@utils/constants'
 import { borderBottom } from '@style/GlobalCss'
+import { typeChecking } from '@utils/functions'
 
 const GNBWrapper = styled.div`
   position: fixed;
@@ -28,7 +29,7 @@ const GNBContainer = styled.nav`
   align-items: center;
   flex-wrap: wrap;
   position: relative;
-  max-width: ${MAX_WIDTH};
+  max-width: ${typeChecking(MAX_WIDTH)};
   height: ${GNB_HEIGHT};
 
   ${CssMediaQueries(BREAKPOINT_SM)} {

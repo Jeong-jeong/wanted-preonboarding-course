@@ -1,11 +1,16 @@
 import styled from '@emotion/styled'
+import { CssMediaQueries, BREAKPOINT_XL } from '@style/MediaQuery'
 import { clearFloat } from '@style/GlobalCss'
-import { Slider_PD_BASE } from '@utils/constants'
+import { Slider_PD_BASE, Slider_PD_XL } from '@utils/constants'
 import { typeChecking } from '@utils/functions'
 
 export const SliderWrapper = styled.div`
   position: relative;
   overflow: hidden;
+
+  ${CssMediaQueries(BREAKPOINT_XL)} {
+    padding-top: 25px;
+  }
 `
 
 export const SliderContainer = styled.div`
@@ -22,6 +27,10 @@ export const SliderList = styled.div`
   display: block;
   overflow: hidden;
   padding: 0 ${typeChecking(Slider_PD_BASE)};
+
+  ${CssMediaQueries(BREAKPOINT_XL)} {
+    padding: 0 ${typeChecking(Slider_PD_XL)};
+  }
 `
 
 export const SliderTrack = styled.ul`
