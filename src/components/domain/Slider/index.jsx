@@ -186,13 +186,13 @@ const Slider = () => {
             width={totalWidth}
           >
             {clonedCardList.map(
-              ({ index, src, srcXL, title, content, link }) => (
+              ({ index, src, srcMD, title, content, link }) => (
                 <SliderItem
                   key={index}
                   isCurrent={checkSameIndex(currendIndexRef.current, index)}
                   index={index}
                   src={src}
-                  srcXL={srcXL}
+                  srcMD={srcMD}
                   title={title}
                   content={content}
                   link={link}
