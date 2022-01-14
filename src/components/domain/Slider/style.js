@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { clearFloat } from '@style/GlobalCss'
+import { clearFloat, dragNone } from '@style/GlobalCss'
 import { Slider_PD_BASE } from '@utils/constants'
 import { typeChecking } from '@utils/functions'
 

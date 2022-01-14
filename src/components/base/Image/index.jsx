@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import { typeChecking } from '@utils/functions'
 import { css } from '@emotion/core'
+import { dragNone } from '@style/GlobalCss'
 
 const Image = ({
   block,
@@ -10,14 +11,17 @@ const Image = ({
   src,
   alt,
   mode,
+  drag,
   ...props
 }) => {
   const ImageStyle = css`
     display: ${block ? 'block' : 'inline-block'};
     width: ${typeChecking(width)};
     height: ${typeChecking(height)};
-
     border-radius: ${typeChecking(borderRadius)};
+    ${!drag && dragNone}
+
+    // drag
     object-fit: ${mode};
   `
 
@@ -32,6 +36,7 @@ Image.propTypes = {
   src: PropTypes.string,
   alt: PropTypes.string.isRequired,
   mode: PropTypes.oneOf(['fill', 'cover', 'none', 'contain']),
+  drag: PropTypes.bool,
 }
 
 Image.defaultProps = {
@@ -41,6 +46,7 @@ Image.defaultProps = {
   height: '100%',
   borderRadius: 0,
   mode: 'fill',
+  drag: true,
 }
 
 export default Image

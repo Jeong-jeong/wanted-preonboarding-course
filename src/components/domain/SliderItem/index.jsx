@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import React, { useEffect, useRef } from 'react'
 import styled from '@emotion/styled'
 import { CssMediaQueries, BREAKPOINT_XL, XL, XLhidden } from '@style/MediaQuery'
 import { Image } from '@components/base'
@@ -8,7 +9,7 @@ import {
   CARD_BORDER_RADIUS,
   Slider_PD_BASE,
 } from '@utils/constants'
-import React, { useEffect, useRef } from 'react'
+import { dragNone } from '@style/GlobalCss'
 
 const SliderBoxWrapper = styled.li`
   float: left;
@@ -40,6 +41,7 @@ const ImageLink = styled.a`
   justify-content: center;
   align-items: center;
   height: 100%;
+  ${dragNone};
 
   ${CssMediaQueries(BREAKPOINT_XL)} {
     display: block;
@@ -93,6 +95,7 @@ const SliderItem = ({
                   alt={title}
                   borderRadius={CARD_BORDER_RADIUS}
                   mode="cover"
+                  drag={false}
                 />
               </XLhidden>
               <XL>
@@ -101,6 +104,7 @@ const SliderItem = ({
                   alt={title}
                   borderRadius={CARD_BORDER_RADIUS}
                   mode="cover"
+                  drag={false}
                 />
               </XL>
             </ImageLink>
