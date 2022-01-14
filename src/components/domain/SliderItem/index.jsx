@@ -8,7 +8,7 @@ import {
   CARD_BORDER_RADIUS,
   Slider_PD_BASE,
 } from '@utils/constants'
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 const SliderBoxWrapper = styled.li`
   float: left;
@@ -36,7 +36,7 @@ const ImageContainer = styled.div`
   }
 `
 const ImageLink = styled.a`
-  display: flex; // FIXME: 임시
+  display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
@@ -58,18 +58,17 @@ const SliderItem = ({
 }) => {
   const sliderItemRef = useRef(null)
 
+  const setWidth = (width) => {
+    sliderItemRef.current.style = `width: ${width}px`
+  }
+
   useEffect(() => {
     const handleResize = () => {
-      sliderItemRef.current.style = `width: ${
-        // FIXME: 중복 처리
-        window.innerWidth - Slider_PD_BASE * 2
-      }px`
+      setWidth(window.innerWidth - Slider_PD_BASE * 2)
     }
 
-    sliderItemRef.current.style = `width: ${
-      // FIXME: 중복 처리
-      window.innerWidth - Slider_PD_BASE * 2
-    }px`
+    setWidth(window.innerWidth - Slider_PD_BASE * 2)
+
     window.addEventListener('resize', handleResize)
 
     return () => {
@@ -127,4 +126,4 @@ SliderItem.defaultProps = {
   isCurrent: false,
 }
 
-export default SliderItem
+export default React.memo(SliderItem)
