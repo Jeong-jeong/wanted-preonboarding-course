@@ -5,30 +5,24 @@ import { Slider_PD_BASE } from '@utils/constants'
 import { deepCloneObject } from '@utils/functions'
 import * as Style from './style'
 
-// 맨 앞과 맨 뒤를 붙임
-// draggedX를 0번 인덱스에서 시작
-// 버튼을 누르거나 shiftSlide 때마다 currentIndex 변화
-// 인덱스가 마지막이거나 맨 앞이면, translate3d값 바꾸기
-
 const Slider = () => {
-  const sliderRef = useRef(null)
-  const currendIndexRef = useRef(0)
-  const draggedX = useRef(-window.innerWidth * 2 + Slider_PD_BASE * 4)
-  const [isTransition, setIsTransition] = useState(false)
-  const [clickedIndex, setClickedIndex] = useState(currendIndexRef.current)
+  const countClone = 2
   const firstCloneIndex = -1
   const lastCloneIndex = cardList.length
+  const originLength = cardList.length // 11 (0 ~ 11)
 
-  const getIndex = (e) => {
-    const clickedIndex = e.target?.closest('li')?.dataset.index
-    clickedIndex && setClickedIndex(+clickedIndex)
-  }
+  const sliderRef = useRef(null)
+  const currendIndexRef = useRef(0)
+  const draggedXRef = useRef(
+    -window.innerWidth * countClone + Slider_PD_BASE * countClone * 2,
+  )
+  const [isTransition, setIsTransition] = useState(false)
 
   const getClonedCardList = (cardList) => {
     const firstCloneList = deepCloneObject(cardList[0])
     const secondCloneList = deepCloneObject(cardList[1])
-    const lastCloneList = deepCloneObject(cardList[cardList.length - 1])
-    const lastBeforeCloneList = deepCloneObject(cardList[cardList.length - 2])
+    const lastCloneList = deepCloneObject(cardList[originLength - 1])
+    const lastBeforeCloneList = deepCloneObject(cardList[originLength - 2])
     const clonedCardList = [
       lastBeforeCloneList,
       lastCloneList,
@@ -50,8 +44,16 @@ const Slider = () => {
     translate3d(${value}px, 0, 0)`
   }
 
+  const checkSameIndex = (curIndex, index) => {
+    return (
+      curIndex === index ||
+      curIndex - lastCloneIndex === index ||
+      curIndex + lastCloneIndex === index
+    )
+  }
+
   useEffect(() => {
-    setTransition(-window.innerWidth * 2 + Slider_PD_BASE * 4)
+    setTransition(draggedXRef.current)
   }, [])
 
   useEffect(() => {
@@ -59,9 +61,16 @@ const Slider = () => {
       differentX = 0,
       scrolledValue = 0,
       threshold = 120,
-      resizeWidth = window.innerWidth - Slider_PD_BASE * 2
+      resizeWidth = window.innerWidth - Slider_PD_BASE * 2 // 초기값
 
     const handleResize = () => {
+      // window.innerWidth는 실시간 변경되는 값이므로 변수에 담을 수 없음
+      setTransition(
+        (currendIndexRef.current + countClone) *
+          -(window.innerWidth - Slider_PD_BASE * 2),
+      )
+      draggedXRef.current =
+        (currendIndexRef.current + countClone) * -resizeWidth
       resizeWidth = window.innerWidth - Slider_PD_BASE * 2
     }
 
@@ -82,14 +91,12 @@ const Slider = () => {
         const currentX = e.touches ? e.touches[0].clientX : e.clientX
 
         differentX = initialX - currentX
-        scrolledValue = draggedX.current - differentX
+        scrolledValue = draggedXRef.current - differentX
         setTransition(scrolledValue)
       }
     }
 
     const dragEnd = (e) => {
-      // - 붙였을 때 음수면 오른쪽 이동
-      // - 붙였을 때 양수면 왼쪽 이동
       if (-differentX <= -threshold) {
         shiftSlide('right')
       } else if (-differentX >= threshold) {
@@ -97,9 +104,11 @@ const Slider = () => {
       } else {
         shiftSlide('none')
       }
+
       setIsTransition(true)
       setTimeout(() => {
         setIsTransition(false)
+        setClonePosition(currendIndexRef.current)
       }, 400)
       sliderRef.current.removeEventListener('mousemove', dragMove)
     }
@@ -107,31 +116,35 @@ const Slider = () => {
     const shiftSlide = (direction) => {
       switch (direction) {
         case 'right':
-          setTransition(draggedX.current - resizeWidth)
-          draggedX.current -= resizeWidth
+          setTransition(draggedXRef.current - resizeWidth)
+          draggedXRef.current -= resizeWidth
           currendIndexRef.current++
-          checkCloneIndex()
           break
         case 'left':
-          setTransition(draggedX.current + resizeWidth)
-          draggedX.current += resizeWidth
+          setTransition(draggedXRef.current + resizeWidth)
+          draggedXRef.current += resizeWidth
           currendIndexRef.current--
-          checkCloneIndex()
           break
         default:
-          setTransition(draggedX.current)
+          setTransition(draggedXRef.current)
       }
     }
 
-    const checkCloneIndex = () => {
-      switch (currendIndexRef.current) {
+    const setClonePosition = (index) => {
+      switch (index) {
         case firstCloneIndex:
-          console.log(firstCloneIndex)
           setTransition((-lastCloneIndex - 1) * resizeWidth)
-          currendIndexRef.current = -lastCloneIndex - 1
+          draggedXRef.current = (-lastCloneIndex - 1) * resizeWidth
+          currendIndexRef.current = originLength - 1
           break
         case lastCloneIndex:
-          setTransition(-window.innerWidth * 2 + Slider_PD_BASE * 4)
+          console.log('last clone')
+          setTransition(
+            -window.innerWidth * countClone + Slider_PD_BASE * countClone * 2,
+          )
+          draggedXRef.current =
+            -window.innerWidth * countClone + Slider_PD_BASE * countClone * 2
+          currendIndexRef.current = 0
           break
         default:
           console.log(currendIndexRef.current)
@@ -139,7 +152,6 @@ const Slider = () => {
     }
 
     window.addEventListener('resize', handleResize)
-    sliderRef.current.addEventListener('click', getIndex, true)
     sliderRef.current.addEventListener('touchstart', initialDrag)
     sliderRef.current.addEventListener('touchmove', dragMove)
     sliderRef.current.addEventListener('mousedown', mouseMove)
@@ -150,7 +162,6 @@ const Slider = () => {
     return () => {
       if (sliderRef.current) {
         window.removeEventListener('resize', handleResize)
-        sliderRef.current.removeEventListener('click', getIndex)
         sliderRef.current.removeEventListener('touchstart', initialDrag)
         sliderRef.current.removeEventListener('touchmove', dragMove)
         sliderRef.current.removeEventListener('mousedown', mouseMove)
@@ -164,16 +175,12 @@ const Slider = () => {
     <Style.SliderWrapper>
       <Style.SliderContainer>
         <Style.SliderList>
-          <Style.SliderTrack
-            ref={sliderRef}
-            isTransition={isTransition}
-            onClick={getIndex}
-          >
+          <Style.SliderTrack ref={sliderRef} isTransition={isTransition}>
             {clonedCardList.map(
               ({ index, src, srcXL, title, content, link }) => (
                 <SliderItem
                   key={index}
-                  isCurrent={currendIndexRef.current === index}
+                  isCurrent={checkSameIndex(currendIndexRef.current, index)}
                   index={index}
                   src={src}
                   srcXL={srcXL}
