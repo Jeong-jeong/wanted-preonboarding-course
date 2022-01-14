@@ -10,6 +10,7 @@ import { Slider } from '@components/domain'
 const MainContainer = styled.main`
   height: 100vh;
   padding-top: ${GNB_HEIGHT_SM};
+  overflow: hidden;
 
   ${CssMediaQueries(BREAKPOINT_MD + BREAKPOINT_XL)} {
     padding-top: ${GNB_HEIGHT};
