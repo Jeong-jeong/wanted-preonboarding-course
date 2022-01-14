@@ -12,6 +12,10 @@ export const AsideWrapper = styled.aside`
   height: calc(${GNB_HEIGHT_SM} - ${MAINBAR_HEIGHT});
   padding: 9px 0;
 
+  ${CssMediaQueries(BREAKPOINT_MD + 'end')} {
+    padding: 9px 0 12px;
+  }
+
   ul > li > * {
     height: 100%;
     padding: 0 6px;
@@ -50,6 +54,10 @@ export const AsideItem = styled.li`
   &[class*='menuItem'] {
     & > button {
       margin-right: 10px;
+
+      ${CssMediaQueries(BREAKPOINT_MD)} {
+        margin-right: 0;
+      }
     }
   }
 

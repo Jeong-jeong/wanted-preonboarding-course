@@ -1,4 +1,5 @@
 // COMMON
+export const END_POINT = 'https://static.wanted.co.kr'
 export const MAX_WIDTH = '1060px'
 
 // GNB
@@ -8,6 +9,9 @@ export const GNB_PD_HORIZONTAL = '20px'
 export const GNB_PD_VETCITAL = '15px'
 
 export const MAINBAR_HEIGHT = '60px'
+
+// Slider
+export const Slider_PD_BASE = 40
 
 // CARD
 export const CARD_PD_BASE = '20px'

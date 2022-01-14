@@ -93,6 +93,8 @@ export const CssMediaQueries = (screen) => {
       return `@media (min-width:${breakpoints['sm']}px) and (max-width:${
         breakpoints[screen] - 1
       }px)`
+    case 'mdend':
+      return `@media (max-width:${breakpoints['md']}px)`
     case 'lg':
       return `@media (min-width:${breakpoints['md']}px) and (max-width:${breakpoints[screen]}px)`
     case 'mdxl':

@@ -3,18 +3,32 @@ import styled from '@emotion/styled'
 import { CssMediaQueries, BREAKPOINT_XL, XL, XLhidden } from '@style/MediaQuery'
 import { Image } from '@components/base'
 import { InformationCard } from '@components/domain'
-import { typeChecking } from '@utils/functions'
-import { cardRadius } from '@style/GlobalCss'
+import {
+  CARD_PD_BASE,
+  CARD_BORDER_RADIUS,
+  Slider_PD_BASE,
+} from '@utils/constants'
+import React, { useEffect, useRef } from 'react'
 
-const SliderBox = styled.div`
+const SliderBoxWrapper = styled.li`
+  float: left;
+  height: 100%;
+`
+
+const SliderBoxContainer = styled.div`
   position: relative;
-  width: ${({ width }) => typeChecking(width)};
+  margin: ${CARD_PD_BASE} calc(${CARD_PD_BASE} / 2);
+`
+const SliderBox = styled.div`
+  width: 100%;
+  display: inline-block;
   text-align: center;
 `
 const ImageContainer = styled.div`
-  filter: brightness(50%);
+  filter: ${({ isCurrent }) =>
+    isCurrent ? `brightness(100%)` : `brightness(50%)`};
   height: 183px;
-  ${cardRadius};
+  border-radius: ${CARD_BORDER_RADIUS};
 
   ${CssMediaQueries(BREAKPOINT_XL)} {
     height: auto;
@@ -22,7 +36,7 @@ const ImageContainer = styled.div`
   }
 `
 const ImageLink = styled.a`
-  display: flex; // FIXME: 임시
+  display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
@@ -32,36 +46,84 @@ const ImageLink = styled.a`
   }
 `
 
-const SliderItem = ({ width, src, srcXL, title, content, ...props }) => {
+const SliderItem = ({
+  isCurrent,
+  index,
+  link,
+  src,
+  srcXL,
+  title,
+  content,
+  ...props
+}) => {
+  const sliderItemRef = useRef(null)
+
+  const setWidth = (width) => {
+    sliderItemRef.current.style = `width: ${width}px`
+  }
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth - Slider_PD_BASE * 2)
+    }
+
+    setWidth(window.innerWidth - Slider_PD_BASE * 2)
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
   return (
-    <SliderBox width={width}>
-      <ImageContainer>
-        <ImageLink>
-          <XLhidden>
-            <Image src={src} alt={title} borderRadius={4} mode="cover" />
-          </XLhidden>
-          <XL>
-            <Image src={srcXL} alt={title} borderRadius={4} mode="cover" />
-          </XL>
-        </ImageLink>
-      </ImageContainer>
-      <InformationCard title={title} content={content} />
-    </SliderBox>
+    <SliderBoxWrapper
+      ref={sliderItemRef}
+      className={isCurrent ? 'currentIndex' : ''}
+      data-index={index}
+      style={{ ...props.style }}
+    >
+      <SliderBoxContainer>
+        <SliderBox>
+          <ImageContainer isCurrent={isCurrent}>
+            <ImageLink href={link} target="_blank" rel="noreferrer">
+              <XLhidden>
+                <Image
+                  src={src}
+                  alt={title}
+                  borderRadius={CARD_BORDER_RADIUS}
+                  mode="cover"
+                />
+              </XLhidden>
+              <XL>
+                <Image
+                  src={srcXL}
+                  alt={title}
+                  borderRadius={CARD_BORDER_RADIUS}
+                  mode="cover"
+                />
+              </XL>
+            </ImageLink>
+          </ImageContainer>
+          <InformationCard title={title} content={content} />
+        </SliderBox>
+      </SliderBoxContainer>
+    </SliderBoxWrapper>
   )
 }
 
 SliderItem.propTypes = {
-  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  src: PropTypes.string,
-  title: PropTypes.string,
-  content: PropTypes.string,
+  isCurrent: PropTypes.bool,
+  index: PropTypes.number.isRequired,
+  link: PropTypes.string.isRequired,
+  src: PropTypes.string.isRequired,
+  srcXL: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
 }
 
 SliderItem.defaultProps = {
-  width: '100%',
-  src: '',
-  title: '',
-  content: '',
+  isCurrent: false,
 }
 
-export default SliderItem
+export default React.memo(SliderItem)
