@@ -72,7 +72,8 @@ const Slider = () => {
           -(window.innerWidth - Slider_PD_BASE * 2),
       )
       draggedXRef.current =
-        (currendIndexRef.current + countClone) * -resizeWidth
+        (currendIndexRef.current + countClone) *
+        -(window.innerWidth - Slider_PD_BASE * 2)
       resizeWidth = window.innerWidth - Slider_PD_BASE * 2
       setTotalWidth(cloneLength * innerWidth) // FIXME:계속 재선언됨
     }
