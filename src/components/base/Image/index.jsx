@@ -16,6 +16,7 @@ const Image = ({
     display: ${block ? 'block' : 'inline-block'};
     width: ${typeChecking(width)};
     height: ${typeChecking(height)};
+
     border-radius: ${typeChecking(borderRadius)};
     object-fit: ${mode};
   `
