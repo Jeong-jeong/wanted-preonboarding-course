@@ -28,7 +28,6 @@ export const ellipsisLine1 = css`
 export const cardRadius = css`
   border-radius: 3px 3px 0 0;
 `
-
 export const clearFloat = css`
   display: block;
   clear: both;
