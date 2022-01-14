@@ -6,11 +6,15 @@ export const BREAKPOINT_LG = 'lg'
 export const BREAKPOINT_MD = 'md'
 export const BREAKPOINT_SM = 'sm'
 
-const breakpoints = {
+export const breakpoints = {
   xl: 1200,
   lg: 1100,
   md: 992,
   sm: 768,
+}
+
+export const isXL = (width) => {
+  return width >= breakpoints[BREAKPOINT_XL]
 }
 
 export const SM = ({ children }) => {

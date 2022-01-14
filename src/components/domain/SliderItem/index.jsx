@@ -13,6 +13,7 @@ import {
   Slider_HEIGHT_XL,
 } from '@utils/constants'
 import { dragNone } from '@style/GlobalCss'
+import { typeChecking } from '@utils/functions'
 
 const SliderBoxWrapper = styled.li`
   float: left;
@@ -20,7 +21,7 @@ const SliderBoxWrapper = styled.li`
   min-height: 1px;
 
   ${CssMediaQueries(BREAKPOINT_XL)} {
-    width: ${MAX_WIDTH} !important;
+    width: ${typeChecking(MAX_WIDTH)} !important;
     height: ${Slider_HEIGHT_XL};
     padding: 0 12px;
     box-sizing: content-box;

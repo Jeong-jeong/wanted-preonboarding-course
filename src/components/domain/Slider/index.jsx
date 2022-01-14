@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState, useMemo } from 'react'
 import { cardList } from '@api'
+import { isXL, breakpoints, BREAKPOINT_XL } from '@style/MediaQuery'
 import { SliderItem } from '@components/domain'
-import { Slider_PD_BASE } from '@utils/constants'
+import { Slider_PD_BASE, Slider_PD_XL, Slider_WIDTH_XL } from '@utils/constants'
 import { deepCloneObject } from '@utils/functions'
 import * as Style from './style'
 
@@ -14,7 +15,7 @@ const Slider = () => {
   const sliderRef = useRef(null)
   const currendIndexRef = useRef(0)
   const draggedXRef = useRef(
-    -window.innerWidth * countClone + Slider_PD_BASE * countClone * 2,
+    -innerWidth * countClone + Slider_PD_BASE * countClone * 2,
   )
   const [isTransition, setIsTransition] = useState(false)
 
@@ -55,7 +56,15 @@ const Slider = () => {
   }
 
   useEffect(() => {
-    setTransition(draggedXRef.current)
+    if (isXL(innerWidth)) {
+      setTransition(
+        -Slider_WIDTH_XL * 2 + (innerWidth - breakpoints[BREAKPOINT_XL]) / 2,
+      )
+      draggedXRef.current =
+        -Slider_WIDTH_XL * 2 + (innerWidth - breakpoints[BREAKPOINT_XL]) / 2
+    } else {
+      setTransition(draggedXRef.current)
+    }
   }, [])
 
   useEffect(() => {
@@ -63,19 +72,30 @@ const Slider = () => {
       differentX = 0,
       scrolledValue = 0,
       threshold = 120,
-      resizeWidth = window.innerWidth - Slider_PD_BASE * 2 // 초기값
+      resizeWidth = isXL(innerWidth)
+        ? Slider_WIDTH_XL
+        : innerWidth - Slider_PD_BASE * 2 // 초기값
 
     const handleResize = () => {
       // window.innerWidth는 실시간 변경되는 값이므로 변수에 담을 수 없음
-      setTransition(
-        (currendIndexRef.current + countClone) *
-          -(window.innerWidth - Slider_PD_BASE * 2),
-      )
-      draggedXRef.current =
-        (currendIndexRef.current + countClone) *
-        -(window.innerWidth - Slider_PD_BASE * 2)
-      resizeWidth = window.innerWidth - Slider_PD_BASE * 2
-      setTotalWidth(cloneLength * innerWidth) // FIXME:계속 재선언됨
+      if (isXL(innerWidth)) {
+        setTransition(
+          -Slider_WIDTH_XL * 2 + (innerWidth - breakpoints[BREAKPOINT_XL]) / 2,
+        )
+        draggedXRef.current =
+          -Slider_WIDTH_XL * 2 + (innerWidth - breakpoints[BREAKPOINT_XL]) / 2
+        resizeWidth = Slider_WIDTH_XL
+      } else {
+        setTransition(
+          (currendIndexRef.current + countClone) *
+            -(innerWidth - Slider_PD_BASE * 2),
+        )
+        draggedXRef.current =
+          (currendIndexRef.current + countClone) *
+          -(innerWidth - Slider_PD_BASE * 2)
+        resizeWidth = innerWidth - Slider_PD_BASE * 2
+        setTotalWidth(cloneLength * innerWidth) // FIXME:계속 재선언됨
+      }
     }
 
     const initialDrag = (e) => {
@@ -121,6 +141,7 @@ const Slider = () => {
     const shiftSlide = (direction) => {
       switch (direction) {
         case 'right':
+          console.log(resizeWidth, 'width')
           setTransition(draggedXRef.current - resizeWidth)
           draggedXRef.current -= resizeWidth
           currendIndexRef.current++
@@ -145,10 +166,10 @@ const Slider = () => {
         case lastCloneIndex:
           console.log('last clone')
           setTransition(
-            -window.innerWidth * countClone + Slider_PD_BASE * countClone * 2,
+            -innerWidth * countClone + Slider_PD_BASE * countClone * 2,
           )
           draggedXRef.current =
-            -window.innerWidth * countClone + Slider_PD_BASE * countClone * 2
+            -innerWidth * countClone + Slider_PD_BASE * countClone * 2
           currendIndexRef.current = 0
           break
         default:
