@@ -113,6 +113,7 @@ const Slider = () => {
         setIsTransition(false)
         setClonePosition(currendIndexRef.current)
       }, 400)
+      sliderRef.current.removeEventListener('touchmove', dragMove)
       sliderRef.current.removeEventListener('mousemove', dragMove)
     }
 
