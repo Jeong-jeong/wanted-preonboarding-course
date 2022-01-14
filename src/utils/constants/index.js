@@ -11,7 +11,10 @@ export const GNB_PD_VETCITAL = '15px'
 export const MAINBAR_HEIGHT = '60px'
 
 // Slider
+export const Slider_HEIGHT = '183px'
+export const Slider_HEIGHT_XL = '300px'
 export const Slider_PD_BASE = 40
+export const Slider_PD_XL = 50
 
 // CARD
 export const CARD_PD_BASE = '20px'

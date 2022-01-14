@@ -101,6 +101,8 @@ export const CssMediaQueries = (screen) => {
       return `@media (min-width:${breakpoints['md']}px) and (max-width:${breakpoints['xl']}px)`
     case 'xl':
       return `@media (min-width:${breakpoints[screen]}px)`
+    case 'xlhidden':
+      return `@media (max-width:${breakpoints['xl'] - 1}px)`
     default:
       throw new Error('Not applicable to breakpoints')
   }
