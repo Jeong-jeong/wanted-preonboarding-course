@@ -36,7 +36,7 @@ export const clearFloat = css`
 
 export const dragNone = css`
   -ms-user-select: none;
-  -moz-user-select: -moz-none;
+  -moz-user-select: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
   user-select: none;
