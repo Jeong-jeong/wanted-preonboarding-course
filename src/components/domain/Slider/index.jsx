@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useMemo } from 'react'
 import { cardList } from '@api'
 import { isXL, breakpoints, BREAKPOINT_XL } from '@style/MediaQuery'
 import { SliderItem } from '@components/domain'
-import { Slider_PD_BASE, Slider_PD_XL, Slider_WIDTH_XL } from '@utils/constants'
+import { Slider_PD_BASE, Slider_WIDTH_XL } from '@utils/constants'
 import { deepCloneObject } from '@utils/functions'
 import * as Style from './style'
 
@@ -16,6 +16,9 @@ const Slider = () => {
   const currendIndexRef = useRef(0)
   const draggedXRef = useRef(
     -innerWidth * countClone + Slider_PD_BASE * countClone * 2,
+  )
+  const centerPotitionXLRef = useRef(
+    (innerWidth - breakpoints[BREAKPOINT_XL]) / 2,
   )
   const [isTransition, setIsTransition] = useState(false)
 
@@ -56,12 +59,11 @@ const Slider = () => {
   }
 
   useEffect(() => {
+    // 초기화
     if (isXL(innerWidth)) {
-      setTransition(
-        -Slider_WIDTH_XL * 2 + (innerWidth - breakpoints[BREAKPOINT_XL]) / 2,
-      )
+      setTransition(-Slider_WIDTH_XL * countClone + centerPotitionXLRef.current)
       draggedXRef.current =
-        -Slider_WIDTH_XL * 2 + (innerWidth - breakpoints[BREAKPOINT_XL]) / 2
+        -Slider_WIDTH_XL * countClone + centerPotitionXLRef.current
     } else {
       setTransition(draggedXRef.current)
     }
@@ -77,13 +79,14 @@ const Slider = () => {
         : innerWidth - Slider_PD_BASE * 2 // 초기값
 
     const handleResize = () => {
-      // window.innerWidth는 실시간 변경되는 값이므로 변수에 담을 수 없음
+      // resize 이벤트마다 재계산된 innerWidth값 반영
+      setTotalWidth(cloneLength * innerWidth)
+      centerPotitionXLRef.current =
+        (innerWidth - breakpoints[BREAKPOINT_XL]) / 2
+
       if (isXL(innerWidth)) {
-        setTransition(
-          -Slider_WIDTH_XL * 2 + (innerWidth - breakpoints[BREAKPOINT_XL]) / 2,
-        )
-        draggedXRef.current =
-          -Slider_WIDTH_XL * 2 + (innerWidth - breakpoints[BREAKPOINT_XL]) / 2
+        setTransition(-Slider_WIDTH_XL * 2 + centerPotitionXLRef.current)
+        draggedXRef.current = -Slider_WIDTH_XL * 2 + centerPotitionXLRef.current
         resizeWidth = Slider_WIDTH_XL
       } else {
         setTransition(
@@ -94,7 +97,6 @@ const Slider = () => {
           (currendIndexRef.current + countClone) *
           -(innerWidth - Slider_PD_BASE * 2)
         resizeWidth = innerWidth - Slider_PD_BASE * 2
-        setTotalWidth(cloneLength * innerWidth) // FIXME:계속 재선언됨
       }
     }
 
@@ -141,7 +143,6 @@ const Slider = () => {
     const shiftSlide = (direction) => {
       switch (direction) {
         case 'right':
-          console.log(resizeWidth, 'width')
           setTransition(draggedXRef.current - resizeWidth)
           draggedXRef.current -= resizeWidth
           currendIndexRef.current++
@@ -159,17 +160,29 @@ const Slider = () => {
     const setClonePosition = (index) => {
       switch (index) {
         case firstCloneIndex:
-          setTransition((-lastCloneIndex - 1) * resizeWidth)
-          draggedXRef.current = (-lastCloneIndex - 1) * resizeWidth
+          const transitionToLastSM = (-lastCloneIndex - 1) * resizeWidth
+          const transitionToLastXL =
+            Slider_WIDTH_XL * (-lastCloneIndex - 1) +
+            centerPotitionXLRef.current
+          setTransition(
+            isXL(innerWidth) ? transitionToLastXL : transitionToLastSM,
+          )
+          draggedXRef.current = isXL(innerWidth)
+            ? transitionToLastXL
+            : transitionToLastSM
           currendIndexRef.current = originLength - 1
           break
         case lastCloneIndex:
-          console.log('last clone')
-          setTransition(
-            -innerWidth * countClone + Slider_PD_BASE * countClone * 2,
-          )
-          draggedXRef.current =
+          const transitionToFirstSM =
             -innerWidth * countClone + Slider_PD_BASE * countClone * 2
+          const transitionToFirstXL =
+            -Slider_WIDTH_XL * countClone + centerPotitionXLRef.current
+          setTransition(
+            isXL(innerWidth) ? transitionToFirstXL : transitionToFirstSM,
+          )
+          draggedXRef.current = isXL(innerWidth)
+            ? transitionToFirstXL
+            : transitionToFirstSM
           currendIndexRef.current = 0
           break
         default:
