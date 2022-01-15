@@ -21,6 +21,7 @@ const Slider = () => {
     (innerWidth - breakpoints[BREAKPOINT_XL]) / 2,
   )
   const [isTransition, setIsTransition] = useState(false)
+  const [allowMove, setAllowMove] = useState(false)
 
   const getClonedCardList = (cardList) => {
     const firstCloneList = deepCloneObject(cardList[0])
@@ -154,6 +155,10 @@ const Slider = () => {
           break
         default:
           setTransition(draggedXRef.current)
+          setAllowMove(true)
+          setTimeout(() => {
+            setAllowMove(false)
+          }, 100)
       }
     }
 
@@ -230,6 +235,7 @@ const Slider = () => {
                   title={title}
                   content={content}
                   link={link}
+                  allowMove={allowMove}
                 />
               ),
             )}

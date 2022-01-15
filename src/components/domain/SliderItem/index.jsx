@@ -14,6 +14,7 @@ const SliderItem = ({
   srcMD,
   title,
   content,
+  allowMove,
   ...props
 }) => {
   const sliderItemRef = useRef(null)
@@ -22,6 +23,11 @@ const SliderItem = ({
     if (!isXL(innerWidth)) {
       sliderItemRef.current.style = `width: ${width}px`
     }
+  }
+
+  const handleClick = (e) => {
+    e.preventDefault()
+    allowMove && window.open(link, '_blank')
   }
 
   useEffect(() => {
@@ -48,7 +54,7 @@ const SliderItem = ({
       <Style.SliderBoxContainer>
         <Style.SliderBox>
           <Style.ImageContainer isCurrent={isCurrent}>
-            <Style.ImageLink href={link} target="_blank" rel="noreferrer">
+            <Style.ImageLink href={link} rel="noreferrer" onClick={handleClick}>
               <SM>
                 <Image
                   src={src}
