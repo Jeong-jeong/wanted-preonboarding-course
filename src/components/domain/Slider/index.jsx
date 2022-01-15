@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState, useMemo } from 'react'
 import { cardList } from '@api'
-import { isXL, breakpoints, BREAKPOINT_XL } from '@style/MediaQuery'
+import { isXL, breakpoints, BREAKPOINT_XL, XL } from '@style/MediaQuery'
+import { ReactComponent as IconRightArrow } from '@assets/icons/icon-rightArrow.svg'
+import { ReactComponent as IconLeftArrow } from '@assets/icons/icon-leftArrow.svg'
 import { SliderItem } from '@components/domain'
+import { Tag } from '@components/base'
 import { Slider_PD_BASE, Slider_WIDTH_XL } from '@utils/constants'
 import { deepCloneObject } from '@utils/functions'
 import * as Style from './style'
@@ -13,6 +16,8 @@ const Slider = () => {
   const originLength = cardList.length // 11 (0 ~ 11)
 
   const sliderRef = useRef(null)
+  const nextArrowRef = useRef(null)
+  const prevArrowRef = useRef(null)
   const currendIndexRef = useRef(0)
   const draggedXRef = useRef(
     -innerWidth * countClone + Slider_PD_BASE * countClone * 2,
@@ -123,6 +128,25 @@ const Slider = () => {
       }
     }
 
+    const clickMove = (e, direction) => {
+      switch (direction) {
+        case 'right':
+          shiftSlide('right')
+          break
+        case 'left':
+          shiftSlide('left')
+          break
+        default:
+          shiftSlide('none')
+      }
+
+      setIsTransition(true)
+      setTimeout(() => {
+        setIsTransition(false)
+        setClonePosition(currendIndexRef.current)
+      }, 400)
+    }
+
     const dragEnd = (e) => {
       if (-differentX <= -threshold) {
         shiftSlide('right')
@@ -144,11 +168,13 @@ const Slider = () => {
     const shiftSlide = (direction) => {
       switch (direction) {
         case 'right':
+          console.log('shift right')
           setTransition(draggedXRef.current - resizeWidth)
           draggedXRef.current -= resizeWidth
           currendIndexRef.current++
           break
         case 'left':
+          console.log('shift left')
           setTransition(draggedXRef.current + resizeWidth)
           draggedXRef.current += resizeWidth
           currendIndexRef.current--
@@ -199,19 +225,32 @@ const Slider = () => {
     sliderRef.current.addEventListener('touchstart', initialDrag)
     sliderRef.current.addEventListener('touchmove', dragMove)
     sliderRef.current.addEventListener('mousedown', mouseMove)
-    window.addEventListener('touchend', dragEnd)
-    window.addEventListener('mouseup', dragEnd)
-    // sliderRef.current.addEventListener('click', slideClick)
+    sliderRef.current.addEventListener('touchend', dragEnd)
+    sliderRef.current.addEventListener('mouseup', dragEnd)
+
+    nextArrowRef.current &&
+      nextArrowRef.current.addEventListener('click', (e) =>
+        clickMove(e, 'right'),
+      )
+    prevArrowRef.current &&
+      prevArrowRef.current.addEventListener('click', (e) =>
+        clickMove(e, 'left'),
+      )
+    // }
 
     return () => {
       if (sliderRef.current) {
-        window.removeEventListener('resize', handleResize)
         sliderRef.current.removeEventListener('touchstart', initialDrag)
         sliderRef.current.removeEventListener('touchmove', dragMove)
         sliderRef.current.removeEventListener('mousedown', mouseMove)
-        window.removeEventListener('touchend', dragEnd)
-        window.removeEventListener('mouseup', dragEnd)
+        sliderRef.current.removeEventListener('touchend', dragEnd)
+        sliderRef.current.removeEventListener('mouseup', dragEnd)
       }
+      // nextArrowRef.current &&
+      //   nextArrowRef.current.removeEventListener('click', clickMove)
+      // prevArrowRef.current &&
+      //   prevArrowRef.current.removeEventListener('click', clickMove)
+      window.removeEventListener('resize', handleResize)
     }
   })
 
@@ -219,6 +258,22 @@ const Slider = () => {
     <Style.SliderWrapper>
       <Style.SliderContainer>
         <Style.SliderList>
+          <XL>
+            <Tag
+              ref={nextArrowRef}
+              className="topBanner nextArrow"
+              label="슬라이드 오른쪽 이동"
+            >
+              <IconRightArrow />
+            </Tag>
+            <Tag
+              ref={prevArrowRef}
+              className="topBanner prevArrow"
+              label="슬라이드 왼쪽 이동"
+            >
+              <IconLeftArrow />
+            </Tag>
+          </XL>
           <Style.SliderTrack
             ref={sliderRef}
             isTransition={isTransition}
