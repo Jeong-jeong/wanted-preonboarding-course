@@ -4,9 +4,9 @@ import { Card } from '@components/base'
 import { ReactComponent as IconRightArrow } from '@assets/icons/icon-rightArrow.svg'
 import * as Style from './style'
 
-const InfomationCard = ({ title, content }) => {
+const InfomationCard = ({ isCurrent, title, content }) => {
   return (
-    <Style.CardWrapper>
+    <Style.CardWrapper isCurrent={isCurrent}>
       <Card>
         <Style.InfoContainer>
           <Style.InfoTitle>{title}</Style.InfoTitle>
@@ -26,6 +26,7 @@ const InfomationCard = ({ title, content }) => {
 }
 
 InfomationCard.propTypes = {
+  isCurrent: PropTypes.bool.isRequired,
   title: PropTypes.string,
   content: PropTypes.string,
 }

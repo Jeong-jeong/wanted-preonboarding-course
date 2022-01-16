@@ -16,7 +16,19 @@ export const CardWrapper = styled.div`
     height: 146px;
     text-align: left;
     background-color: white;
-    /* opacity: 0; */
+
+    opacity: ${({ isCurrent }) => (isCurrent ? 1 : 0)};
+    display: ${({ isCurrent }) => (isCurrent ? 'block' : 'none')};
+    animation: fadeIn 0.6s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 `
 
