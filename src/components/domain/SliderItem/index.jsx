@@ -1,67 +1,10 @@
 import PropTypes from 'prop-types'
 import React, { useEffect, useRef } from 'react'
-import styled from '@emotion/styled'
-import { CssMediaQueries, BREAKPOINT_XL, SM, SMhidden } from '@style/MediaQuery'
+import { SM, SMhidden, isXL } from '@style/MediaQuery'
 import { Image } from '@components/base'
 import { InformationCard } from '@components/domain'
-import {
-  CARD_PD_BASE,
-  CARD_BORDER_RADIUS,
-  Slider_PD_BASE,
-  MAX_WIDTH,
-  Slider_HEIGHT,
-  Slider_HEIGHT_XL,
-} from '@utils/constants'
-import { dragNone } from '@style/GlobalCss'
-import { typeChecking } from '@utils/functions'
-
-const SliderBoxWrapper = styled.li`
-  float: left;
-  height: 100%;
-  min-height: 1px;
-
-  ${CssMediaQueries(BREAKPOINT_XL)} {
-    width: ${typeChecking(MAX_WIDTH)} !important;
-    height: ${Slider_HEIGHT_XL};
-    padding: 0 12px;
-    box-sizing: content-box;
-  }
-`
-
-const SliderBoxContainer = styled.div`
-  position: relative;
-  margin: ${CARD_PD_BASE} calc(${CARD_PD_BASE} / 2);
-
-  ${CssMediaQueries(BREAKPOINT_XL)} {
-    margin: 0;
-  }
-`
-const SliderBox = styled.div`
-  width: 100%;
-  height: 100%;
-  display: inline-block;
-  text-align: center;
-`
-const ImageContainer = styled.div`
-  filter: ${({ isCurrent }) =>
-    isCurrent ? `brightness(100%)` : `brightness(50%)`};
-  height: ${Slider_HEIGHT};
-  border-radius: ${CARD_BORDER_RADIUS};
-
-  ${CssMediaQueries(BREAKPOINT_XL)} {
-    height: auto;
-    border-radius: none;
-  }
-`
-const ImageLink = styled.a`
-  ${CssMediaQueries(BREAKPOINT_XL + 'hidden')} {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-  }
-  ${dragNone};
-`
+import { CARD_BORDER_RADIUS, Slider_PD_BASE } from '@utils/constants'
+import * as Style from './style'
 
 const SliderItem = ({
   isCurrent,
@@ -71,20 +14,28 @@ const SliderItem = ({
   srcMD,
   title,
   content,
+  allowMove,
   ...props
 }) => {
   const sliderItemRef = useRef(null)
 
   const setWidth = (width) => {
-    sliderItemRef.current.style = `width: ${width}px`
+    if (!isXL(innerWidth)) {
+      sliderItemRef.current.style = `width: ${width}px`
+    }
+  }
+
+  const handleClick = (e) => {
+    e.preventDefault()
+    allowMove && window.open(link, '_blank')
   }
 
   useEffect(() => {
     const handleResize = () => {
-      setWidth(window.innerWidth - Slider_PD_BASE * 2)
+      setWidth(innerWidth - Slider_PD_BASE * 2)
     }
 
-    setWidth(window.innerWidth - Slider_PD_BASE * 2)
+    setWidth(innerWidth - Slider_PD_BASE * 2)
 
     window.addEventListener('resize', handleResize)
 
@@ -94,16 +45,16 @@ const SliderItem = ({
   }, [])
 
   return (
-    <SliderBoxWrapper
+    <Style.SliderBoxWrapper
       ref={sliderItemRef}
       className={isCurrent ? 'currentIndex' : ''}
       data-index={index}
       style={{ ...props.style }}
     >
-      <SliderBoxContainer>
-        <SliderBox>
-          <ImageContainer isCurrent={isCurrent}>
-            <ImageLink href={link} target="_blank" rel="noreferrer">
+      <Style.SliderBoxContainer>
+        <Style.SliderBox>
+          <Style.ImageContainer isCurrent={isCurrent}>
+            <Style.ImageLink href={link} rel="noreferrer" onClick={handleClick}>
               <SM>
                 <Image
                   src={src}
@@ -122,12 +73,12 @@ const SliderItem = ({
                   drag={false}
                 />
               </SMhidden>
-            </ImageLink>
-          </ImageContainer>
+            </Style.ImageLink>
+          </Style.ImageContainer>
           <InformationCard title={title} content={content} />
-        </SliderBox>
-      </SliderBoxContainer>
-    </SliderBoxWrapper>
+        </Style.SliderBox>
+      </Style.SliderBoxContainer>
+    </Style.SliderBoxWrapper>
   )
 }
 
