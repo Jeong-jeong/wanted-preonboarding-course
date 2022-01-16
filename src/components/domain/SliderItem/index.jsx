@@ -75,7 +75,11 @@ const SliderItem = ({
               </SMhidden>
             </Style.ImageLink>
           </Style.ImageContainer>
-          <InformationCard title={title} content={content} />
+          <InformationCard
+            isCurrent={isCurrent}
+            title={title}
+            content={content}
+          />
         </Style.SliderBox>
       </Style.SliderBoxContainer>
     </Style.SliderBoxWrapper>
