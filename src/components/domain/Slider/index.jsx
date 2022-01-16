@@ -20,6 +20,7 @@ const Slider = () => {
   const originLength = cardList.length // 11 (0 ~ 11)
 
   const sliderRef = useRef(null)
+  const sliderWrapperRef = useRef(null)
   const nextArrowRef = useRef(null)
   const prevArrowRef = useRef(null)
   const currendIndexRef = useRef(0)
@@ -241,34 +242,39 @@ const Slider = () => {
     }, 3000)
 
     window.addEventListener('resize', handleResize)
+
     sliderRef.current.addEventListener('touchstart', initialDrag)
     sliderRef.current.addEventListener('touchmove', dragMove)
     sliderRef.current.addEventListener('mousedown', mouseMove)
     sliderRef.current.addEventListener('touchend', dragEnd)
     sliderRef.current.addEventListener('mouseup', dragEnd)
 
+    sliderWrapperRef.current.addEventListener('mouseleave', dragEnd)
+
     nextArrowRef.current.addEventListener('click', clickMoveRight)
     prevArrowRef.current.addEventListener('click', clickMoveLeft)
     // }
 
     return () => {
-      if (sliderRef.current) {
-        sliderRef.current.removeEventListener('touchstart', initialDrag)
-        sliderRef.current.removeEventListener('touchmove', dragMove)
-        sliderRef.current.removeEventListener('mousedown', mouseMove)
-        sliderRef.current.removeEventListener('touchend', dragEnd)
-        sliderRef.current.removeEventListener('mouseup', dragEnd)
-      }
+      clearInterval(intervalId)
+
+      window.removeEventListener('resize', handleResize)
+
+      sliderRef.current.removeEventListener('touchstart', initialDrag)
+      sliderRef.current.removeEventListener('touchmove', dragMove)
+      sliderRef.current.removeEventListener('mousedown', mouseMove)
+      sliderRef.current.removeEventListener('touchend', dragEnd)
+      sliderRef.current.removeEventListener('mouseup', dragEnd)
+
+      sliderWrapperRef.current.removeEventListener('mouseleave', dragEnd)
 
       nextArrowRef.current.removeEventListener('click', clickMoveRight)
       prevArrowRef.current.removeEventListener('click', clickMoveLeft)
-      window.removeEventListener('resize', handleResize)
-      clearInterval(intervalId)
     }
   })
 
   return (
-    <Style.SliderWrapper>
+    <Style.SliderWrapper ref={sliderWrapperRef}>
       <Style.SliderContainer>
         <Style.SliderList>
           <Tag
