@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useMemo } from 'react'
 import { cardList } from '@api'
-import { isXL, breakpoints, BREAKPOINT_XL, XL } from '@style/MediaQuery'
+import { isXL, breakpoints, BREAKPOINT_XL } from '@style/MediaQuery'
 import { ReactComponent as IconRightArrow } from '@assets/icons/icon-rightArrow.svg'
 import { ReactComponent as IconLeftArrow } from '@assets/icons/icon-leftArrow.svg'
 import { SliderItem } from '@components/domain'
@@ -128,7 +128,14 @@ const Slider = () => {
       }
     }
 
-    const clickMove = (e, direction) => {
+    const clickMoveRight = () => {
+      clickMove('right')
+    }
+    const clickMoveLeft = () => {
+      clickMove('left')
+    }
+
+    const clickMove = (direction) => {
       switch (direction) {
         case 'right':
           shiftSlide('right')
@@ -168,13 +175,11 @@ const Slider = () => {
     const shiftSlide = (direction) => {
       switch (direction) {
         case 'right':
-          console.log('shift right')
           setTransition(draggedXRef.current - resizeWidth)
           draggedXRef.current -= resizeWidth
           currendIndexRef.current++
           break
         case 'left':
-          console.log('shift left')
           setTransition(draggedXRef.current + resizeWidth)
           draggedXRef.current += resizeWidth
           currendIndexRef.current--
@@ -228,14 +233,8 @@ const Slider = () => {
     sliderRef.current.addEventListener('touchend', dragEnd)
     sliderRef.current.addEventListener('mouseup', dragEnd)
 
-    nextArrowRef.current &&
-      nextArrowRef.current.addEventListener('click', (e) =>
-        clickMove(e, 'right'),
-      )
-    prevArrowRef.current &&
-      prevArrowRef.current.addEventListener('click', (e) =>
-        clickMove(e, 'left'),
-      )
+    nextArrowRef.current.addEventListener('click', clickMoveRight)
+    prevArrowRef.current.addEventListener('click', clickMoveLeft)
     // }
 
     return () => {
@@ -246,10 +245,9 @@ const Slider = () => {
         sliderRef.current.removeEventListener('touchend', dragEnd)
         sliderRef.current.removeEventListener('mouseup', dragEnd)
       }
-      // nextArrowRef.current &&
-      //   nextArrowRef.current.removeEventListener('click', clickMove)
-      // prevArrowRef.current &&
-      //   prevArrowRef.current.removeEventListener('click', clickMove)
+
+      nextArrowRef.current.removeEventListener('click', clickMoveRight)
+      prevArrowRef.current.removeEventListener('click', clickMoveLeft)
       window.removeEventListener('resize', handleResize)
     }
   })
@@ -258,22 +256,20 @@ const Slider = () => {
     <Style.SliderWrapper>
       <Style.SliderContainer>
         <Style.SliderList>
-          <XL>
-            <Tag
-              ref={nextArrowRef}
-              className="topBanner nextArrow"
-              label="슬라이드 오른쪽 이동"
-            >
-              <IconRightArrow />
-            </Tag>
-            <Tag
-              ref={prevArrowRef}
-              className="topBanner prevArrow"
-              label="슬라이드 왼쪽 이동"
-            >
-              <IconLeftArrow />
-            </Tag>
-          </XL>
+          <Tag
+            ref={nextArrowRef}
+            className="topBanner nextArrow"
+            label="슬라이드 오른쪽 이동"
+          >
+            <IconRightArrow />
+          </Tag>
+          <Tag
+            ref={prevArrowRef}
+            className="topBanner prevArrow"
+            label="슬라이드 왼쪽 이동"
+          >
+            <IconLeftArrow />
+          </Tag>
           <Style.SliderTrack
             ref={sliderRef}
             isTransition={isTransition}
