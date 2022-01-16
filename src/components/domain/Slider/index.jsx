@@ -154,6 +154,16 @@ const Slider = () => {
       }, 400)
     }
 
+    const autoMove = () => {
+      shiftSlide('right')
+
+      setIsTransition(true)
+      setTimeout(() => {
+        setIsTransition(false)
+        setClonePosition(currendIndexRef.current)
+      }, 400)
+    }
+
     const dragEnd = (e) => {
       if (-differentX <= -threshold) {
         shiftSlide('right')
@@ -222,9 +232,13 @@ const Slider = () => {
           currendIndexRef.current = 0
           break
         default:
-          console.log(currendIndexRef.current)
+        // console.log(currendIndexRef.current)
       }
     }
+
+    const intervalId = setInterval(() => {
+      autoMove()
+    }, 3000)
 
     window.addEventListener('resize', handleResize)
     sliderRef.current.addEventListener('touchstart', initialDrag)
@@ -249,6 +263,7 @@ const Slider = () => {
       nextArrowRef.current.removeEventListener('click', clickMoveRight)
       prevArrowRef.current.removeEventListener('click', clickMoveLeft)
       window.removeEventListener('resize', handleResize)
+      clearInterval(intervalId)
     }
   })
 
