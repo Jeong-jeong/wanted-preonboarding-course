@@ -5,7 +5,11 @@ import { ReactComponent as IconRightArrow } from '@assets/icons/icon-rightArrow.
 import { ReactComponent as IconLeftArrow } from '@assets/icons/icon-leftArrow.svg'
 import { SliderItem } from '@components/domain'
 import { Tag } from '@components/base'
-import { Slider_PD_BASE, Slider_WIDTH_XL } from '@utils/constants'
+import {
+  Slider_PD_BASE,
+  Slider_WIDTH_XL,
+  Slider_TIMEOUT,
+} from '@utils/constants'
 import { deepCloneObject } from '@utils/functions'
 import * as Style from './style'
 
@@ -135,6 +139,14 @@ const Slider = () => {
       clickMove('left')
     }
 
+    const temporaryTransition = (time) => {
+      setIsTransition(true)
+      setTimeout(() => {
+        setIsTransition(false)
+        setClonePosition(currendIndexRef.current)
+      }, time)
+    }
+
     const clickMove = (direction) => {
       switch (direction) {
         case 'right':
@@ -147,21 +159,13 @@ const Slider = () => {
           shiftSlide('none')
       }
 
-      setIsTransition(true)
-      setTimeout(() => {
-        setIsTransition(false)
-        setClonePosition(currendIndexRef.current)
-      }, 400)
+      temporaryTransition(Slider_TIMEOUT)
     }
 
     const autoMove = () => {
       shiftSlide('right')
 
-      setIsTransition(true)
-      setTimeout(() => {
-        setIsTransition(false)
-        setClonePosition(currendIndexRef.current)
-      }, 400)
+      temporaryTransition(Slider_TIMEOUT)
     }
 
     const dragEnd = (e) => {
@@ -173,11 +177,7 @@ const Slider = () => {
         shiftSlide('none')
       }
 
-      setIsTransition(true)
-      setTimeout(() => {
-        setIsTransition(false)
-        setClonePosition(currendIndexRef.current)
-      }, 400)
+      temporaryTransition(Slider_TIMEOUT)
       sliderRef.current.removeEventListener('touchmove', dragMove)
       sliderRef.current.removeEventListener('mousemove', dragMove)
     }

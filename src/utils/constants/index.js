@@ -17,6 +17,7 @@ export const Slider_PD_BASE = 40
 export const Slider_PD_XL = 50
 export const Slider_PD_HORIZINTAL = 12
 export const Slider_WIDTH_XL = MAX_WIDTH + Slider_PD_HORIZINTAL * 2
+export const Slider_TIMEOUT = 400
 
 // CARD
 export const CARD_PD_BASE = '20px'
