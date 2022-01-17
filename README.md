@@ -44,6 +44,23 @@ $ yarn start
 
 <br>
 <br>
+
+### 슬라이드 (캐러샐) 영역 ✅
+
+| **스와이프 이벤트** |
+| :-: |
+| ![기본스와이프](https://user-images.githubusercontent.com/68528752/149719757-536f5057-d35a-4a56-957d-fe806aa78cca.gif) |
+| **자동 스와이프 이벤트** |
+| ![자동스와이프](https://user-images.githubusercontent.com/68528752/149719762-6e2bcd31-8af8-41e0-98ea-202d3011ab0e.gif) |
+| **왼쪽/오른쪽 버튼 이동** |
+| ![버튼이동](https://user-images.githubusercontent.com/68528752/149719753-f428a3e2-13c5-4faf-bc53-239da33f5fc7.gif) |
+| **가운데 정렬** |
+| ![가운데정렬](https://user-images.githubusercontent.com/68528752/149719745-3fb9889d-32e0-4af5-b3da-82903771ef43.gif) |
+| **threshold(120) 이상 스와이프 처리** |
+| ![threshold](https://user-images.githubusercontent.com/68528752/149719981-877dd026-9a1f-4ed3-9266-d0af417cdecd.gif) |
+| **마우스 아웃 처리** |
+| ![마우스아웃처리](https://user-images.githubusercontent.com/68528752/149719752-79caae07-5233-46eb-9902-82f899176777.gif) |
+
 ### 슬라이드 (캐러샐) 영역 ✅
 
 | **스와이프 이벤트** |
