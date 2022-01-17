@@ -256,7 +256,6 @@ const Slider = () => {
 
     nextArrowRef.current.addEventListener('click', clickMoveRight)
     prevArrowRef.current.addEventListener('click', clickMoveLeft)
-    // }
 
     return () => {
       clearInterval(intervalId)
