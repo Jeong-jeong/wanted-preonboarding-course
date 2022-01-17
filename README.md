@@ -44,10 +44,11 @@ $ yarn start
 
 <br>
 <br>
+
 ### 슬라이드 (캐러샐) 영역 ✅
 
 | **스와이프 이벤트** |
-| :-: |
+|:---:|
 | ![기본스와이프](https://user-images.githubusercontent.com/68528752/149719757-536f5057-d35a-4a56-957d-fe806aa78cca.gif) |
 | **자동 스와이프 이벤트** |
 | ![자동스와이프](https://user-images.githubusercontent.com/68528752/149719762-6e2bcd31-8af8-41e0-98ea-202d3011ab0e.gif) |
