@@ -1,73 +1,72 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/f500616b-67ef-4e18-9ff3-2181af7b31a6/deploy-status)](https://app.netlify.com/sites/admiring-snyder-88f4ea/deploys)
 
+# 원티드-프리온보딩코스-선발과제
 
-# Getting Started with Create React App
+## 🚀 배포
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[배포주소 바로가기](wanted-preonboarding.netlify.app)
 
-## Available Scripts
+## 🧐 프로젝트 빌드 및 실행 방법
 
-In the project directory, you can run:
+1. 상단 `Code` 버튼을 눌러 레포지토리를 클론 받습니다.
 
-### `npm start`
+```
+$ git clone https://github.com/Jeong-jeong/wanted-preonboarding-course.git
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+2. 패키지를 설치합니다.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```
+$ yarn install
+```
 
-### `npm test`
+3. 서버를 실행합니다.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+$ yarn start
+```
 
-### `npm run build`
+## 📄 요구사항
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- 원티드 페이지 상단 영역 React 기반 클론
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 상단 GNB (Global Navigation Bar) ✅
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+| **sm < 768px** |
+| :-: |
+| ![sm](https://user-images.githubusercontent.com/68528752/149716114-3096cd7a-c748-4196-a2ce-62e1c416dfa6.png) |
+| **768px <= md < 992px** |
+| ![md](https://user-images.githubusercontent.com/68528752/149716314-27a0aaa5-0313-45c5-8116-f1a3ff3b2c7d.png) |
+| **992px <= lg < 1100px** |
+| ![lg](https://user-images.githubusercontent.com/68528752/149716356-5676a3e9-92a6-40df-89dc-856531c2c494.png) |
+| **1100px <= xl < 1200px** |
+| ![xl](https://user-images.githubusercontent.com/68528752/149716420-87e56596-c5c2-4d2e-a909-17d2e56bf570.png) |
 
-### `npm run eject`
+<br>
+<br>
+### 슬라이드 (캐러샐) 영역 ✅
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+| **스와이프 이벤트** |
+| :-: |
+| ![기본스와이프](https://user-images.githubusercontent.com/68528752/149719757-536f5057-d35a-4a56-957d-fe806aa78cca.gif) |
+| **자동 스와이프 이벤트** |
+| ![자동스와이프](https://user-images.githubusercontent.com/68528752/149719762-6e2bcd31-8af8-41e0-98ea-202d3011ab0e.gif) |
+| **왼쪽/오른쪽 버튼 이동** |
+| ![버튼이동](https://user-images.githubusercontent.com/68528752/149719753-f428a3e2-13c5-4faf-bc53-239da33f5fc7.gif) |
+| **가운데 정렬** |
+| ![가운데정렬](https://user-images.githubusercontent.com/68528752/149719745-3fb9889d-32e0-4af5-b3da-82903771ef43.gif) |
+| **threshold(120) 이상 스와이프 처리** |
+| ![threshold](https://user-images.githubusercontent.com/68528752/149719981-877dd026-9a1f-4ed3-9266-d0af417cdecd.gif) |
+| **마우스 아웃 처리** |
+| ![마우스아웃처리](https://user-images.githubusercontent.com/68528752/149719752-79caae07-5233-46eb-9902-82f899176777.gif) |
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 반응형 구현 ✅
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```js
+const breakpoints = {
+  xl: 1200,
+  lg: 1100,
+  md: 992,
+  sm: 768,
+}
+```
