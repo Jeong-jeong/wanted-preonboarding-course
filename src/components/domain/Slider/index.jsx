@@ -96,8 +96,13 @@ const Slider = () => {
         (innerWidth - breakpoints[BREAKPOINT_XL]) / 2
 
       if (isXL(innerWidth)) {
-        setTransition(-Slider_WIDTH_XL * 2 + centerPotitionXLRef.current)
-        draggedXRef.current = -Slider_WIDTH_XL * 2 + centerPotitionXLRef.current
+        setTransition(
+          -Slider_WIDTH_XL * (currendIndexRef.current + countClone) +
+            centerPotitionXLRef.current,
+        )
+        draggedXRef.current =
+          -Slider_WIDTH_XL * (currendIndexRef.current + countClone) +
+          centerPotitionXLRef.current
         resizeWidth = Slider_WIDTH_XL
       } else {
         setTransition(
@@ -186,7 +191,6 @@ const Slider = () => {
     const shiftSlide = (direction) => {
       switch (direction) {
         case 'right':
-          console.log(resizeWidth, 'width')
           setTransition(draggedXRef.current - resizeWidth)
           draggedXRef.current -= resizeWidth
           currendIndexRef.current++
@@ -233,8 +237,6 @@ const Slider = () => {
             : transitionToFirstSM
           currendIndexRef.current = 0
           break
-        default:
-        // console.log(currendIndexRef.current)
       }
     }
 
