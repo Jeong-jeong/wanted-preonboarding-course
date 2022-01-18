@@ -42,3 +42,10 @@ export const SliderTrack = styled.ul`
     ${clearFloat};
   }
 `
+
+export const TagWrapper = styled.div`
+  opacity: 0;
+  ${CssMediaQueries(BREAKPOINT_XL)} {
+    opacity: 1;
+  }
+`
