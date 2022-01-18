@@ -279,20 +279,22 @@ const Slider = () => {
     <Style.SliderWrapper ref={sliderWrapperRef}>
       <Style.SliderContainer>
         <Style.SliderList>
-          <Tag
-            ref={nextArrowRef}
-            className="topBanner nextArrow"
-            label="슬라이드 오른쪽 이동"
-          >
-            <IconRightArrow />
-          </Tag>
-          <Tag
-            ref={prevArrowRef}
-            className="topBanner prevArrow"
-            label="슬라이드 왼쪽 이동"
-          >
-            <IconLeftArrow />
-          </Tag>
+          <Style.TagWrapper>
+            <Tag
+              ref={nextArrowRef}
+              className="topBanner nextArrow"
+              label="슬라이드 오른쪽 이동"
+            >
+              <IconRightArrow />
+            </Tag>
+            <Tag
+              ref={prevArrowRef}
+              className="topBanner prevArrow"
+              label="슬라이드 왼쪽 이동"
+            >
+              <IconLeftArrow />
+            </Tag>
+          </Style.TagWrapper>
           <Style.SliderTrack
             ref={sliderRef}
             isTransition={isTransition}
