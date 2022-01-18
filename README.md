@@ -4,7 +4,7 @@
 
 ## 🚀 배포
 
-[배포주소 바로가기](https://wanted-preonboarding.netlify.app)
+<a href="https://wanted-preonboarding.netlify.app" target="_blank">배포주소 바로가기</a>
 
 ## 🧐 프로젝트 빌드 및 실행 방법
 
