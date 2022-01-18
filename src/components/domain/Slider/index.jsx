@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState, useMemo } from 'react'
-import { cardList } from '@api'
 import { isXL, breakpoints, BREAKPOINT_XL } from '@style/MediaQuery'
 import { ReactComponent as IconRightArrow } from '@assets/icons/icon-rightArrow.svg'
 import { ReactComponent as IconLeftArrow } from '@assets/icons/icon-leftArrow.svg'
@@ -10,6 +9,7 @@ import {
   Slider_WIDTH_XL,
   Slider_TIMEOUT,
 } from '@utils/constants'
+import { cardList } from '@utils/mocks'
 import { deepCloneObject } from '@utils/functions'
 import * as Style from './style'
 

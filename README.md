@@ -26,6 +26,18 @@ $ yarn install
 $ yarn start
 ```
 
+## 기술 스택
+
+- `react` ^17.0.2
+- `react-router-dom` 6
+- `react-scripts` 4.0.3
+- `react-responsive` ^.9.0.0-beta.5
+- `emotion` ^11.7.1
+- `craco` ^6.4.3
+- `axios` ^0.24.0
+- `storybook` ^6.4.9
+- `commitizen` ^4.2.4
+
 ## 📄 요구사항
 
 - 원티드 페이지 상단 영역 React 기반 클론

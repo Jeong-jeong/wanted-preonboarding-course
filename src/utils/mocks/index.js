@@ -1,7 +1,5 @@
 import { END_POINT } from '@utils/constants'
 
-// list 10개가 무작위로 바뀌는 중
-
 export const cardList = [
   {
     index: 0,
